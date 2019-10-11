@@ -1,7 +1,9 @@
 package com.krishannattar.sprint.controllers;
 
 import com.krishannattar.sprint.models.Todo;
+import com.krishannattar.sprint.models.User;
 import com.krishannattar.sprint.services.TodoService;
+import com.krishannattar.sprint.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,12 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
+
+    @Autowired
+    private UserService userService;
+
+
+
 //    {
 //        "completed": true
 //    }
@@ -26,10 +34,19 @@ public class TodoController {
             consumes = {"application/json"})
     public ResponseEntity<?> updateTodo(Authentication authentication, @RequestBody Todo updatedTodo, @PathVariable long todoid)
     {
+        User currentUser = userService.findUserByName(authentication.getName());
+        for(Todo t: currentUser.getTodos())
+        {
+            if(t.getTodoid()==todoid)
+            {
+                todoService.update(updatedTodo, todoid);
+                return new ResponseEntity<>("UPDATE SUCCESS", HttpStatus.OK);
+            }
+        }
 //        Todo newTodo = todoService.findTodoByTodoid(todoid);
 
-        todoService.update(updatedTodo, todoid);
-        return new ResponseEntity<>("UPDATE SUCCESS", HttpStatus.OK);
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 }
