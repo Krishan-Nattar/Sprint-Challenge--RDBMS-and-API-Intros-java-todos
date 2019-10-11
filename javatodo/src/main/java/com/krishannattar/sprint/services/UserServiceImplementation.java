@@ -3,6 +3,7 @@ package com.krishannattar.sprint.services;
 import com.krishannattar.sprint.models.Todo;
 import com.krishannattar.sprint.models.User;
 import com.krishannattar.sprint.models.UserRoles;
+import com.krishannattar.sprint.models.Useremail;
 import com.krishannattar.sprint.repos.RoleRepository;
 import com.krishannattar.sprint.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,8 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     {
         User newUser = new User();
         newUser.setUsername(user.getUsername());
-        newUser.setPasswordNoEncrypt(user.getPassword()); //spring encrypts the password before it gets here, so we don't want to encrypt it again.
+        newUser.setPasswordNoEncrypt(user.getPassword());
+        newUser.setPrimaryemail(user.getPrimaryemail().toLowerCase());
 
         ArrayList<UserRoles> newRoles = new ArrayList<>();
         for (UserRoles ur : user.getUserRoles())
@@ -66,6 +68,13 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
             newRoles.add(new UserRoles(newUser, ur.getRole()));
         }
         newUser.setUserRoles(newRoles);
+
+        for (Useremail ue : user.getUseremails())
+        {
+            newUser.getUseremails()
+                    .add(new Useremail(newUser,
+                            ue.getUseremail()));
+        }
 
         for (Todo t : user.getTodos())
         {
