@@ -1,8 +1,13 @@
 package com.krishannattar.sprint.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "todo")
@@ -72,4 +77,22 @@ public class Todo extends Auditable {
     public void setUser(User user) {
         this.user = user;
     }
+
+//    @JsonIgnore
+//    public List<SimpleGrantedAuthority> getAuthority()
+//    {
+//        List<SimpleGrantedAuthority> rtnList = new ArrayList<>();
+//
+//        for (UserRoles r : this.userRoles)
+//        {
+//            String myRole = "ROLE_" + r.getRole()
+//                    .getRolename()
+//                    .toUpperCase();
+//            rtnList.add(new SimpleGrantedAuthority(myRole));
+//        }
+//
+//        return rtnList;
+//    }
+
+
 }

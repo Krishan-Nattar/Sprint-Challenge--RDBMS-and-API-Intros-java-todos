@@ -54,7 +54,7 @@ public class UserController {
 
         if(checkUser.getAuthority().hashCode() == authentication.getAuthorities().hashCode())
         {
-            
+
         } else
             {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

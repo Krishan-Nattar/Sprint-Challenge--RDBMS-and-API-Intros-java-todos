@@ -38,4 +38,9 @@ public class TodoServiceImplementation implements TodoService{
         }
         return todorepos.save(currentTodo);
     }
+
+//    @Override
+//    public Todo findTodoByTodoid(long todoid) {
+//        return todorepos.findById(todoid).orElseThrow(() -> new EntityNotFoundException(Long.toString(todoid)));
+//    }
 }

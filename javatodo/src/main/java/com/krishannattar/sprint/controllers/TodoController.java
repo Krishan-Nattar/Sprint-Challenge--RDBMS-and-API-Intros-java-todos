@@ -5,6 +5,7 @@ import com.krishannattar.sprint.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,8 +24,10 @@ public class TodoController {
     @PutMapping(value = "/todos/todoid/{todoid}",
             produces = {"application/json"},
             consumes = {"application/json"})
-    public ResponseEntity<?> updateTodo(@RequestBody Todo updatedTodo, @PathVariable long todoid)
+    public ResponseEntity<?> updateTodo(Authentication authentication, @RequestBody Todo updatedTodo, @PathVariable long todoid)
     {
+//        Todo newTodo = todoService.findTodoByTodoid(todoid);
+
         todoService.update(updatedTodo, todoid);
         return new ResponseEntity<>("UPDATE SUCCESS", HttpStatus.OK);
     }
