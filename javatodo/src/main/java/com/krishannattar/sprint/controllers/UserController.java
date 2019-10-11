@@ -51,7 +51,21 @@ public class UserController {
                     long userid) throws URISyntaxException
     {
         User checkUser = userService.findUserById(userid);
+        System.out.println(checkUser.hashCode());
+
+        System.out.println(checkUser.getAuthority());
+        System.out.println(checkUser.getAuthority().hashCode());
+        System.out.println(checkUser.hashCode());
+        System.out.println(checkUser.hashCode());
+
+        System.out.println("*************");
+        System.out.println(authentication.getAuthorities());
+        System.out.println(authentication.getAuthorities().hashCode());
+        System.out.println(authentication.getCredentials());
+        System.out.println(authentication.getDetails());
+        System.out.println(authentication.getName());
         System.out.println(authentication.getPrincipal());
+        System.out.println(authentication.hashCode());
         userService.update(newUserData, userid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
