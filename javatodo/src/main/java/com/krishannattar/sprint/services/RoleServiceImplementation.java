@@ -23,14 +23,12 @@ public class RoleServiceImplementation implements RoleService
         rolerepos.findAll().iterator().forEachRemaining(list::add);
         return list;
     }
-
-
+    
     @Override
     public Role findRoleById(long id)
     {
         return rolerepos.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
     }
-
 
     @Override
     public void delete(long id)
@@ -38,7 +36,6 @@ public class RoleServiceImplementation implements RoleService
         rolerepos.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
         rolerepos.deleteById(id);
     }
-
 
     @Transactional
     @Override
