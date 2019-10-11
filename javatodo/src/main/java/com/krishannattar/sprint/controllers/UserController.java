@@ -7,10 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -34,5 +31,27 @@ public class UserController {
         newuser =  userService.save(newuser);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+//    {
+//        "todos":
+//        [
+//        {
+//            "description": "Have Fun",
+//                "datestarted": "2019-01-01T01:00"
+//        }
+//        ]
+//    }
+    @PutMapping(value = "/users/todo/{userid}",
+            produces = {"application/json"},
+            consumes = {"application/json"})
+    public ResponseEntity<?> addTodoToUser(
+            @RequestBody
+                    User newUserData,
+            @PathVariable
+                    long userid) throws URISyntaxException
+    {
+        userService.update(newUserData, userid);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
