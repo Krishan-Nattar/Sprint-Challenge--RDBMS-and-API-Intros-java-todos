@@ -23,7 +23,7 @@ public class RoleServiceImplementation implements RoleService
         rolerepos.findAll().iterator().forEachRemaining(list::add);
         return list;
     }
-    
+
     @Override
     public Role findRoleById(long id)
     {

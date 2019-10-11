@@ -108,12 +108,8 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 
         if (user.getUserRoles().size() > 0)
         {
-            // with so many relationships happening, I decided to go
-            // with old school queries
-            // delete the old ones
             rolerepos.deleteUserRolesByUserId(currentUser.getUserid());
 
-            // add the new ones
             for (UserRoles ur : user.getUserRoles())
             {
                 rolerepos.insertUserRoles(id, ur.getRole().getRoleid());
