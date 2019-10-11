@@ -50,9 +50,10 @@ public class UserController {
             @PathVariable
                     long userid) throws URISyntaxException
     {
-        User checkUser = userService.findUserById(userid);
+//        User checkUser = userService.findUserById(userid);
+        User currentUser = userService.findUserByName(authentication.getName());
 
-        if(checkUser.getAuthority().hashCode() == authentication.getAuthorities().hashCode())
+        if(currentUser.getUserid() == userid)
         {
 
         } else
