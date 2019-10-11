@@ -1,3 +1,5 @@
+package com.krishannattar.sprint;
+
 import com.krishannattar.sprint.models.*;
 import com.krishannattar.sprint.services.RoleService;
 import com.krishannattar.sprint.services.UserService;
