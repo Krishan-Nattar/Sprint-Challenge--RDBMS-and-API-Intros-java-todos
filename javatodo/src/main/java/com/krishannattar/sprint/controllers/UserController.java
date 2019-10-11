@@ -44,12 +44,14 @@ public class UserController {
     @PutMapping(value = "/users/todo/{userid}",
             produces = {"application/json"},
             consumes = {"application/json"})
-    public ResponseEntity<?> addTodoToUser(
+    public ResponseEntity<?> addTodoToUser(Authentication authentication,
             @RequestBody
                     User newUserData,
             @PathVariable
                     long userid) throws URISyntaxException
     {
+        User checkUser = userService.findUserById(userid);
+        System.out.println(authentication.getPrincipal());
         userService.update(newUserData, userid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
