@@ -28,7 +28,7 @@ public class UserController {
         return new ResponseEntity<>(userService.findUserByName(authentication.getName()), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/user", consumes = {"application/json"}, produces = {"application/json"})
+    @PostMapping(value = "/users/user", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<?> addNewUser(@Valid @RequestBody User newuser) throws URISyntaxException
     {
         newuser =  userService.save(newuser);
